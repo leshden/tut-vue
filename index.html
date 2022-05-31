@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <title>tut vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class='nav-bar'>Navigation Bar</div>
+
+      <div class='cart'>Cart({{cart}})</div>
+
+      <div class='product-display'>
+        <div class='product-container'>
+          <div class='product-image'>
+            <img :src="image" />
+          </div>
+          <div class='product-info'>
+            <h1>{{title}}</h1>
+
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
+            <ul>
+              <li v-for="detail in details">{{detail}}</li>
+            </ul>
+            <div class='color-circle' :style="{backgroundColor: variant.color}" v-for='(variant, index) in variants' :key='variant.id' @mouseover="updateVariant(index)"></div>
+
+            <button class='button' v-on:click='addToCart' :disabled='!inStock'>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+      const mountedApp = app.mount('#app');
+    </script>
+  </body>
+</html>
